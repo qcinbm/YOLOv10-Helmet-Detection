@@ -1,0 +1,15 @@
+import locale
+locale.getpreferredencoding = lambda: "UTF-8"
+import cv2_imshow
+
+TRAINED_MODEL_PATH = 'runs/detect/train/weights/best.pt'
+model = YOLOv10(TRAINED_MODEL_PATH)
+
+IMAGE_URL = 'https://ips-dc.org/wp-content/uploads/2022/05/Black-Workers-Need-a-Bill-of-Rights.jpeg'
+CONF_THRESHOLD = 0.3
+results = model.predict(source=IMAGE_URL,
+                       imgsz=IMG_SIZE,
+                       conf=CONF_THRESHOLD)
+annotated_img = results[0].plot()
+
+cv2_imshow(annotated_img)
